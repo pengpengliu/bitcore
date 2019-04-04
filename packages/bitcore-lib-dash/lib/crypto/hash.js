@@ -1,5 +1,9 @@
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
 'use strict';
 
+var x11hash = require('@dashevo/x11-hash-js');
 var crypto = require('crypto');
 var BufferUtil = require('../util/buffer');
 var $ = require('../util/preconditions');
@@ -23,6 +27,11 @@ Hash.sha256.blocksize = 512;
 Hash.sha256sha256 = function(buf) {
   $.checkArgument(BufferUtil.isBuffer(buf));
   return Hash.sha256(Hash.sha256(buf));
+};
+
+Hash.x11 = function(buf) {
+  $.checkArgument(BufferUtil.isBuffer(buf));
+  return Buffer.from(x11hash.digest(buf, 1, 1));
 };
 
 Hash.ripemd160 = function(buf) {

@@ -1,3 +1,6 @@
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
 'use strict';
 
 var BN = require('./bn');
@@ -25,7 +28,6 @@ var Signature = function Signature(r, s) {
 Signature.prototype.set = function(obj) {
   this.r = obj.r || this.r || undefined;
   this.s = obj.s || this.s || undefined;
-
   this.i = typeof obj.i !== 'undefined' ? obj.i : this.i; //public key recovery parameter in range [0, 3]
   this.compressed = typeof obj.compressed !== 'undefined' ?
     obj.compressed : this.compressed; //whether the recovered pubkey is compressed

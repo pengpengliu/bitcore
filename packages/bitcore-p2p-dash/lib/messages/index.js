@@ -1,9 +1,9 @@
  'use strict';
 
-var bitcore = require('bitcore-lib-dash');
-var BufferUtil = bitcore.util.buffer;
-var Hash = bitcore.crypto.Hash;
-var $ = bitcore.util.preconditions;
+var dashcore = require('bitcore-lib-dash');
+var BufferUtil = dashcore.util.buffer;
+var Hash = dashcore.crypto.Hash;
+var $ = dashcore.util.preconditions;
 
 /**
  * A factory to build Bitcoin protocol messages.
@@ -13,6 +13,7 @@ var $ = bitcore.util.preconditions;
  * @param {Function=} options.BlockHeader - A block header constructor
  * @param {Function=} options.MerkleBlock - A merkle block constructor
  * @param {Function=} options.Transaction - A transaction constructor
+ * @param {Function=} options.MnListDiff - A masternode difference list constructor
  * @constructor
  */
 function Messages(options) {
@@ -27,7 +28,7 @@ function Messages(options) {
   if (!options) {
     options = {};
   }
-  this.network = options.network || bitcore.Networks.defaultNetwork;
+  this.network = options.network || dashcore.Networks.defaultNetwork;
 }
 
 Messages.MINIMUM_LENGTH = 20;
@@ -97,7 +98,6 @@ Messages.prototype._discardUntilNextMessage = function(dataBuffer) {
 };
 
 Messages.prototype._buildFromBuffer = function(command, payload) {
-  console.log(command);
   if (!this.builder.commands[command]) {
     if (this.builder.unsupportedCommands.indexOf(command) > -1) return; // ignore unsupported message commands
     throw new Error('Unrecognized message command: ' + command); // throw error if unrecognized message command

@@ -1,3 +1,6 @@
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
 'use strict';
 
 var _ = require('lodash');
@@ -236,7 +239,8 @@ BlockHeader.prototype.getDifficulty = function getDifficulty() {
  */
 BlockHeader.prototype._getHash = function hash() {
   var buf = this.toBuffer();
-  return Hash.sha256sha256(buf);
+  // return Hash.sha256sha256(buf);
+  return Hash.x11(buf);
 };
 
 var idProperty = {

@@ -1,3 +1,6 @@
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
 'use strict';
 
 var _ = require('lodash');
@@ -177,7 +180,7 @@ Address._classifyFromVersion = function(buffer) {
 };
 
 /**
- * Internal function to transform a bitcoin address buffer
+ * Internal function to transform a Bitcoin address buffer
  *
  * @param {Buffer} buffer - An instance of a hex encoded address Buffer
  * @param {string=} network - The network: 'livenet' or 'testnet'
@@ -195,14 +198,10 @@ Address._transformBuffer = function(buffer, network, type) {
     throw new TypeError('Address buffers must be exactly 21 bytes.');
   }
 
-  var networkObj = Networks.get(network);
+  network = Networks.get(network);
   var bufferVersion = Address._classifyFromVersion(buffer);
 
-  if (network && !networkObj) {
-    throw new TypeError('Unknown network');
-  }
-
-  if (!bufferVersion.network || (networkObj && networkObj !== bufferVersion.network)) {
+  if (!bufferVersion.network || (network && network !== bufferVersion.network)) {
     throw new TypeError('Address has mismatched network type.');
   }
 
@@ -259,16 +258,11 @@ Address._transformScript = function(script, network) {
  * @param {Array} publicKeys - a set of public keys to create an address
  * @param {number} threshold - the number of signatures needed to release the funds
  * @param {String|Network} network - either a Network instance, 'livenet', or 'testnet'
- * @param {boolean=} nestedWitness - if the address uses a nested p2sh witness
  * @return {Address}
  */
-Address.createMultisig = function(publicKeys, threshold, network, nestedWitness) {
+Address.createMultisig = function(publicKeys, threshold, network) {
   network = network || publicKeys[0].network || Networks.defaultNetwork;
-  var redeemScript = Script.buildMultisigOut(publicKeys, threshold);
-  if (nestedWitness) {
-    return Address.payingTo(Script.buildWitnessMultisigOutFromScript(redeemScript), network);
-  }
-  return Address.payingTo(redeemScript, network);
+  return Address.payingTo(Script.buildMultisigOut(publicKeys, threshold), network);
 };
 
 /**
@@ -341,6 +335,7 @@ Address.fromScriptHash = function(hash, network) {
 Address.payingTo = function(script, network) {
   $.checkArgument(script, 'script is required');
   $.checkArgument(script instanceof Script, 'script must be instance of Script');
+
   return Address.fromScriptHash(Hash.sha256ripemd160(script.toBuffer()), network);
 };
 
@@ -378,7 +373,7 @@ Address.fromBuffer = function(buffer, network, type) {
 /**
  * Instantiate an address from an address string
  *
- * @param {string} str - An string of the bitcoin address
+ * @param {string} str - A string of the Bitcoin address
  * @param {String|Network=} network - either a Network instance, 'livenet', or 'testnet'
  * @param {string=} type - The type of address: 'script' or 'pubkey'
  * @returns {Address} A new valid and frozen instance of an Address
@@ -468,7 +463,8 @@ Address.prototype.isPayToScriptHash = function() {
  */
 Address.prototype.toBuffer = function() {
   var version = Buffer.from([this.network[this.type]]);
-  return Buffer.concat([version, this.hashBuffer]);
+  var buf = Buffer.concat([version, this.hashBuffer]);
+  return buf;
 };
 
 /**
@@ -483,7 +479,7 @@ Address.prototype.toObject = Address.prototype.toJSON = function toObject() {
 };
 
 /**
- * Will return a the string representation of the address
+ * Will return a string representation of the address
  *
  * @returns {string} Bitcoin address
  */

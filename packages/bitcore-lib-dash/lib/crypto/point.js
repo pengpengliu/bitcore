@@ -1,8 +1,10 @@
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
 'use strict';
 
 var BN = require('./bn');
 var BufferUtil = require('../util/buffer');
-
 var EC = require('elliptic').ec;
 var ec = new EC('secp256k1');
 var ecPoint = ec.curve.point.bind(ec.curve);
@@ -73,7 +75,8 @@ Point.getN = function getN() {
   return new BN(ec.curve.n.toArray());
 };
 
-Point.prototype._getX = Point.prototype.getX;
+if (!Point.prototype._getX)
+  Point.prototype._getX = Point.prototype.getX;
 
 /**
  *
@@ -85,7 +88,8 @@ Point.prototype.getX = function getX() {
   return new BN(this._getX().toArray());
 };
 
-Point.prototype._getY = Point.prototype.getY;
+if (!Point.prototype._getY)
+  Point.prototype._getY = Point.prototype.getY;
 
 /**
  *
@@ -122,7 +126,6 @@ Point.prototype.validate = function validate() {
   if (p2.y.cmp(this.y) !== 0) {
     throw new Error('Invalid y value for curve.');
   }
-
 
   //todo: needs test case
   if (!(this.mul(Point.getN()).isInfinity())) {

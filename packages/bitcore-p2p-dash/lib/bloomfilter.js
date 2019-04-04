@@ -1,9 +1,9 @@
 'use strict';
 
-var bitcore = require('bitcore-lib-dash');
+var dashcore = require('bitcore-lib-dash');
 var BloomFilter = require('bloom-filter');
-var BufferReader = bitcore.encoding.BufferReader;
-var BufferWriter = bitcore.encoding.BufferWriter;
+var BufferReader = dashcore.encoding.BufferReader;
+var BufferWriter = dashcore.encoding.BufferWriter;
 
 /**
  * A constructor for Bloom Filters

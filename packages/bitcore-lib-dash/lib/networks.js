@@ -1,3 +1,6 @@
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
 'use strict';
 var _ = require('lodash');
 
@@ -44,11 +47,7 @@ function get(arg, keys) {
     }
     return undefined;
   }
-  if(networkMaps[arg] && networkMaps[arg].length >= 1) {
-    return networkMaps[arg][0];
-  } else {
-    return networkMaps[arg];
-  }
+  return networkMaps[arg];
 }
 
 /**
@@ -79,8 +78,7 @@ function addNetwork(data) {
     privatekey: data.privatekey,
     scripthash: data.scripthash,
     xpubkey: data.xpubkey,
-    xprivkey: data.xprivkey,
-    protocolVersion: data.protocolVersion
+    xprivkey: data.xprivkey
   });
 
   if (data.networkMagic) {
@@ -102,10 +100,7 @@ function addNetwork(data) {
   }
   _.each(network, function(value) {
     if (!_.isUndefined(value) && !_.isObject(value)) {
-      if(!networkMaps[value]) {
-        networkMaps[value] = [];
-      }
-      networkMaps[value].push(network);
+      networkMaps[value] = network;
     }
   });
 
@@ -128,9 +123,8 @@ function removeNetwork(network) {
     }
   }
   for (var key in networkMaps) {
-    const index = networkMaps[key].indexOf(network);
-    if (index >= 0) {
-      delete networkMaps[key][index];
+    if (networkMaps[key] === network) {
+      delete networkMaps[key];
     }
   }
 }
@@ -175,28 +169,74 @@ addNetwork({
  */
 var testnet = get('testnet');
 
-addNetwork({
-  name: 'regtest',
-  alias: 'dev',
-  pubkeyhash: 0x6f,
-  privatekey: 0xef,
-  scripthash: 0xc4,
-  xpubkey: 0x043587cf,
-  xprivkey: 0x04358394,
-  networkMagic: 0xfabfb5da,
-  port: 18444,
-  dnsSeeds: []
+// Add configurable values for testnet/regtest
+
+var TESTNET = {
+  PORT: 19999,
+  NETWORK_MAGIC: BufferUtil.integerAsBuffer(0xcee2caff),
+  DNS_SEEDS: [
+    'testnet-seed.darkcoin.io',
+    'testnet-seed.dashdot.io',
+    'test.dnsseed.masternode.io'
+  ]
+};
+
+for (var key in TESTNET) {
+  if (!_.isObject(TESTNET[key])) {
+    networkMaps[TESTNET[key]] = testnet;
+  }
+}
+
+var REGTEST = {
+  PORT: 19994,
+  NETWORK_MAGIC: BufferUtil.integerAsBuffer(0xfcc1b7dc),
+  DNS_SEEDS: []
+};
+
+for (var key in REGTEST) {
+  if (!_.isObject(REGTEST[key])) {
+    networkMaps[REGTEST[key]] = testnet;
+  }
+}
+
+Object.defineProperty(testnet, 'port', {
+  enumerable: true,
+  configurable: false,
+  get: function() {
+    if (this.regtestEnabled) {
+      return REGTEST.PORT;
+    } else {
+      return TESTNET.PORT;
+    }
+  }
+});
+
+Object.defineProperty(testnet, 'networkMagic', {
+  enumerable: true,
+  configurable: false,
+  get: function() {
+    if (this.regtestEnabled) {
+      return REGTEST.NETWORK_MAGIC;
+    } else {
+      return TESTNET.NETWORK_MAGIC;
+    }
+  }
+});
+
+Object.defineProperty(testnet, 'dnsSeeds', {
+  enumerable: true,
+  configurable: false,
+  get: function() {
+    if (this.regtestEnabled) {
+      return REGTEST.DNS_SEEDS;
+    } else {
+      return TESTNET.DNS_SEEDS;
+    }
+  }
 });
 
 /**
- * @instance
- * @member Networks#testnet
- */
-var regtest = get('regtest');
-
-/**
  * @function
- * @deprecated
  * @member Networks#enableRegtest
  * Will enable regtest features for testnet
  */
@@ -206,7 +246,6 @@ function enableRegtest() {
 
 /**
  * @function
- * @deprecated
  * @member Networks#disableRegtest
  * Will disable regtest features for testnet
  */
@@ -224,7 +263,6 @@ module.exports = {
   livenet: livenet,
   mainnet: livenet,
   testnet: testnet,
-  regtest: regtest,
   get: get,
   enableRegtest: enableRegtest,
   disableRegtest: disableRegtest

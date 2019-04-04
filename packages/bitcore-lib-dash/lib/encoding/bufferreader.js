@@ -1,3 +1,6 @@
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
 'use strict';
 
 var _ = require('lodash');
@@ -35,11 +38,7 @@ BufferReader.prototype.set = function(obj) {
 };
 
 BufferReader.prototype.eof = function() {
-  if(this.buf) {
-    return this.pos >= this.buf.length;
-  } else {
-    return true;
-  }
+  return this.pos >= this.buf.length;
 };
 
 BufferReader.prototype.finished = BufferReader.prototype.eof;

@@ -1,3 +1,6 @@
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
 'use strict';
 
 var _ = require('lodash');
@@ -9,8 +12,8 @@ var Unit = require('./unit');
 /**
  * Bitcore URI
  *
- * Instantiate an URI from a bitcoin URI String or an Object. An URI instance
- * can be created with a bitcoin uri string or an object. All instances of
+ * Instantiate an URI from a Bitcoin URI String or an Object. A URI instance
+ * can be created with a Bitcoin URI string or an object. All instances of
  * URI are valid, the static method isValid allows checking before instantiation.
  *
  * All standard parameters can be found as members of the class, the address
@@ -20,11 +23,11 @@ var Unit = require('./unit');
  * @example
  * ```javascript
  *
- * var uri = new URI('bitcoin:12A1MyfXbW6RhdRAZEqofac5jCQQjwEPBu?amount=1.2');
+ * var uri = new URI('dash:XsV4GHVKGTjQFvwB7c6mYsGV3Mxf7iser6?amount=1.2');
  * console.log(uri.address, uri.amount);
  * ```
  *
- * @param {string|Object} data - A bitcoin URI string or an Object
+ * @param {string|Object} data - A Bitcoin URI string or an Object
  * @param {Array.<string>=} knownParams - Required non-standard params
  * @throws {TypeError} Invalid bitcoin address
  * @throws {TypeError} Invalid amount
@@ -83,7 +86,7 @@ URI.fromObject = function fromObject(json) {
  * @example
  * ```javascript
  *
- * var valid = URI.isValid('bitcoin:12A1MyfXbW6RhdRAZEqofac5jCQQjwEPBu');
+ * var valid = URI.isValid('dash:XsV4GHVKGTjQFvwB7c6mYsGV3Mxf7iser6');
  * // true
  * ```
  *
@@ -110,8 +113,8 @@ URI.isValid = function(arg, knownParams) {
 URI.parse = function(uri) {
   var info = URL.parse(uri, true);
 
-  if (info.protocol !== 'bitcoin:') {
-    throw new TypeError('Invalid bitcoin URI');
+  if (info.protocol !== 'dash:') {
+    throw new TypeError('Invalid dash URI');
   }
 
   // workaround to host insensitiveness
@@ -135,7 +138,7 @@ URI.prototype._fromObject = function(obj) {
   /* jshint maxcomplexity: 10 */
 
   if (!Address.isValid(obj.address)) {
-    throw new TypeError('Invalid bitcoin address');
+    throw new TypeError('Invalid dash address');
   }
 
   this.address = new Address(obj.address);
@@ -184,7 +187,7 @@ URI.prototype.toObject = URI.prototype.toJSON = function toObject() {
 };
 
 /**
- * Will return a the string representation of the URI
+ * Will return a string representation of the URI
  *
  * @returns {string} Bitcoin URI string
  */
@@ -205,7 +208,7 @@ URI.prototype.toString = function() {
   _.extend(query, this.extras);
 
   return URL.format({
-    protocol: 'bitcoin:',
+    protocol: 'dash:',
     host: this.address,
     query: query
   });

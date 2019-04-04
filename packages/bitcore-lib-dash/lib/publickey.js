@@ -1,3 +1,6 @@
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
 'use strict';
 
 var BN = require('./crypto/bn');
@@ -30,7 +33,7 @@ var $ = require('./util/preconditions');
  * @param {Object} extra - additional options
  * @param {Network=} extra.network - Which network should the address for this public key be for
  * @param {String=} extra.compressed - If the public key is compressed
- * @returns {PublicKey} A new valid instance of an PublicKey
+ * @returns {PublicKey} A new valid instance of a PublicKey
  * @constructor
  */
 function PublicKey(data, extra) {
@@ -134,7 +137,7 @@ PublicKey._transformPrivateKey = function(privkey) {
 /**
  * Internal function to transform DER into a public key point
  *
- * @param {Buffer} buf - An hex encoded buffer
+ * @param {Buffer} buf - A hex encoded buffer
  * @param {bool=} strict - if set to false, will loosen some conditions
  * @returns {Object} An object with keys: point and compressed
  * @private

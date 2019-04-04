@@ -1,3 +1,6 @@
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
 'use strict';
 
 var benchmark = require('benchmark');
@@ -5,7 +8,7 @@ var bitcore = require('..');
 var async = require('async');
 var blockData = require('./block-357238.json');
 
-var maxTime = 30;
+var maxTime = 10;
 
 console.log('Benchmarking Script');
 console.log('---------------------------------------');

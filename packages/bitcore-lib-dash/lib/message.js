@@ -1,3 +1,6 @@
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
 'use strict';
 
 var _ = require('lodash');
@@ -7,12 +10,18 @@ var Address = require('./address');
 var BufferWriter = require('./encoding/bufferwriter');
 var ECDSA = require('./crypto/ecdsa');
 var Signature = require('./crypto/signature');
-var sha256sha256 = require('./crypto/hash').sha256sha256;
+var Hash = require('./crypto/hash');
+var sha256sha256 = Hash.sha256sha256;
 var JSUtil = require('./util/js');
 var $ = require('./util/preconditions');
 
-
-function Message(message) {
+/**
+ * constructs a new message to sign and verify.
+ *
+ * @param {String} message
+ * @returns {Message}
+ */
+var Message = function Message(message) {
   if (!(this instanceof Message)) {
     return new Message(message);
   }
@@ -20,13 +29,13 @@ function Message(message) {
   this.message = message;
 
   return this;
-}
+};
 
-Message.MAGIC_BYTES = new Buffer('Bitcoin Signed Message:\n');
+Message.MAGIC_BYTES = Buffer.from('DarkCoin Signed Message:\n');
 
 Message.prototype.magicHash = function magicHash() {
   var prefix1 = BufferWriter.varintBufNum(Message.MAGIC_BYTES.length);
-  var messageBuffer = new Buffer(this.message);
+  var messageBuffer = Buffer.from(this.message);
   var prefix2 = BufferWriter.varintBufNum(messageBuffer.length);
   var buf = Buffer.concat([prefix1, Message.MAGIC_BYTES, prefix2, messageBuffer]);
   var hash = sha256sha256(buf);
@@ -47,7 +56,7 @@ Message.prototype._sign = function _sign(privateKey) {
 };
 
 /**
- * Will sign a message with a given bitcoin private key.
+ * Will sign a message with a given Bitcoin private key.
  *
  * @param {PrivateKey} privateKey - An instance of PrivateKey
  * @returns {String} A base64 encoded compact signature
@@ -83,7 +92,7 @@ Message.prototype.verify = function verify(bitcoinAddress, signatureString) {
   if (_.isString(bitcoinAddress)) {
     bitcoinAddress = Address.fromString(bitcoinAddress);
   }
-  var signature = Signature.fromCompact(new Buffer(signatureString, 'base64'));
+  var signature = Signature.fromCompact(Buffer.from(signatureString, 'base64'));
 
   // recover the public key
   var ecdsa = new ECDSA();
@@ -160,5 +169,3 @@ Message.prototype.inspect = function() {
 };
 
 module.exports = Message;
-
-var Script = require('./script');

@@ -1,3 +1,6 @@
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
 'use strict';
 
 /* jshint unused: false */
@@ -15,7 +18,7 @@ var errors = bitcore.errors;
 
 describe('TransactionSignature', function() {
 
-  var fromAddress = 'mszYqVnqKoQx4jcTdJXxwKAissE3Jbrrc1';
+  var fromAddress = 'yYo3PeSBv2rMnJeyLUCCzx4Y8VhPppZKkC';
   var privateKey = 'cSBnVM4xvxarwGQuAfQFwqDg9k5tErHUHzgWsEfD4zdwUasvqRVY';
   var simpleUtxoWith100000Satoshis = {
     address: fromAddress,
@@ -104,7 +107,7 @@ describe('TransactionSignature', function() {
     it('can deserialize when signature is a buffer', function() {
       var signature = getSignatureFromTransaction();
       var serialized = signature.toObject();
-      serialized.signature = new Buffer(serialized.signature, 'hex');
+      serialized.signature = Buffer.from(serialized.signature, 'hex');
       expect(TransactionSignature.fromObject(serialized).toObject()).to.deep.equal(signature.toObject());
     });
 

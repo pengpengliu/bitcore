@@ -1,3 +1,6 @@
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
 'use strict';
 
 var _ = require('lodash');
@@ -197,7 +200,6 @@ Opcode.map = {
   OP_CHECKMULTISIGVERIFY: 175,
 
   OP_CHECKLOCKTIMEVERIFY: 177,
-  OP_CHECKSEQUENCEVERIFY: 178,
 
   // expansion
   OP_NOP1: 176,

@@ -1,3 +1,6 @@
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
 'use strict';
 /* jshint unused: false */
 
@@ -15,16 +18,16 @@ var MultiSigScriptHashInput = bitcore.Transaction.Input.MultiSigScriptHash;
 
 describe('MultiSigScriptHashInput', function() {
 
-  var privateKey1 = new PrivateKey('KwF9LjRraetZuEjR8VqEq539z137LW5anYDUnVK11vM3mNMHTWb4');
-  var privateKey2 = new PrivateKey('L4PqnaPTCkYhAqH3YQmefjxQP6zRcF4EJbdGqR8v6adtG9XSsadY');
-  var privateKey3 = new PrivateKey('L4CTX79zFeksZTyyoFuPQAySfmP7fL3R41gWKTuepuN7hxuNuJwV');
+  var privateKey1 = new PrivateKey('XBK4nzpDtLX1xZjoAFq7LJEAu2JgnJgqA7ZPK1eCLHd9AXSx1M6L');
+  var privateKey2 = new PrivateKey('XJTmEqmpWSB9EAHRaAmXAy9RJ8G143fUgAyBMwU7QwuyfJdx2tPY');
+  var privateKey3 = new PrivateKey('XJGNyNYMZLPKcnzMq1uFuQATaneh78efRb2QqzEr9GeD77wn2KwS');
   var public1 = privateKey1.publicKey;
   var public2 = privateKey2.publicKey;
   var public3 = privateKey3.publicKey;
-  var address = new Address('33zbk2aSZYdNbRsMPPt6jgy6Kq1kQreqeb');
+  var address = new Address('7UiEaDrcNXj1bCQJf1Yc54xkFNr8Ef4sTV');
 
   var output = {
-    address: '33zbk2aSZYdNbRsMPPt6jgy6Kq1kQreqeb',
+    address: '7UiEaDrcNXj1bCQJf1Yc54xkFNr8Ef4sTV',
     txId: '66e64ef8a3b384164b78453fa8c8194de9a473ba14f89485a0e433699daec140',
     outputIndex: 0,
     script: new Script(address),
@@ -111,37 +114,4 @@ describe('MultiSigScriptHashInput', function() {
     var roundtrip = new MultiSigScriptHashInput(input.toObject());
     roundtrip.toObject().should.deep.equal(input.toObject());
   });
-  it('will get the scriptCode for nested witness', function() {
-    var address = Address.createMultisig([public1, public2, public3], 2, 'testnet', true);
-    var utxo = {
-      address: address.toString(),
-      txId: '66e64ef8a3b384164b78453fa8c8194de9a473ba14f89485a0e433699daec140',
-      outputIndex: 0,
-      script: new Script(address),
-      satoshis: 1000000
-    };
-    var transaction = new Transaction()
-      .from(utxo, [public1, public2, public3], 2, true)
-      .to(address, 1000000);
-    var input = transaction.inputs[0];
-    var scriptCode = input.getScriptCode();
-    scriptCode.toString('hex').should.equal('695221025c95ec627038e85b5688a9b3d84d28c5ebe66e8c8d697d498e20fe96e3b1ab1d2102cdddfc974d41a62f1f80081deee70592feb7d6e6cf6739d6592edbe7946720e72103c95924e02c240b5545089c69c6432447412b58be43fd671918bd184a5009834353ae');
-  });
-  it('will get the satoshis buffer for nested witness', function() {
-    var address = Address.createMultisig([public1, public2, public3], 2, 'testnet', true);
-    var utxo = {
-      address: address.toString(),
-      txId: '66e64ef8a3b384164b78453fa8c8194de9a473ba14f89485a0e433699daec140',
-      outputIndex: 0,
-      script: new Script(address),
-      satoshis: 1000000
-    };
-    var transaction = new Transaction()
-      .from(utxo, [public1, public2, public3], 2, true)
-      .to(address, 1000000);
-    var input = transaction.inputs[0];
-    var satoshisBuffer = input.getSatoshisBuffer();
-    satoshisBuffer.toString('hex').should.equal('40420f0000000000');
-  });
-
 });

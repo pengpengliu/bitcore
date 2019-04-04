@@ -1,3 +1,6 @@
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
 'use strict';
 
 var bufferUtil = require('../util/buffer');
@@ -6,7 +9,6 @@ var assert = require('assert');
 var BufferWriter = function BufferWriter(obj) {
   if (!(this instanceof BufferWriter))
     return new BufferWriter(obj);
-  this.bufLen = 0;
   if (obj)
     this.set(obj);
   else
@@ -15,7 +17,6 @@ var BufferWriter = function BufferWriter(obj) {
 
 BufferWriter.prototype.set = function(obj) {
   this.bufs = obj.bufs || this.bufs || [];
-  this.bufLen = this.bufs.reduce(function(prev, buf){ return prev + buf.length; }, 0);
   return this;
 };
 
@@ -24,20 +25,18 @@ BufferWriter.prototype.toBuffer = function() {
 };
 
 BufferWriter.prototype.concat = function() {
-  return Buffer.concat(this.bufs, this.bufLen);
+  return Buffer.concat(this.bufs);
 };
 
 BufferWriter.prototype.write = function(buf) {
   assert(bufferUtil.isBuffer(buf));
   this.bufs.push(buf);
-  this.bufLen += buf.length;
   return this;
 };
 
 BufferWriter.prototype.writeReverse = function(buf) {
   assert(bufferUtil.isBuffer(buf));
   this.bufs.push(bufferUtil.reverse(buf));
-  this.bufLen += buf.length;
   return this;
 };
 

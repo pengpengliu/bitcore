@@ -1,3 +1,6 @@
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
 'use strict';
 
 var docsURL = 'http://bitcore.io/';
@@ -45,11 +48,35 @@ module.exports = [{
     'message': 'Invalid exchange rate: {0}'
   }]
 }, {
-  name: 'MerkleBlock',
-  message: 'Internal Error on MerkleBlock {0}',
+  name: 'GovObject',
+  message: 'Internal Error on GovObject {0}',
   errors: [{
-    'name': 'InvalidMerkleTree',
-    'message': 'This MerkleBlock contain an invalid Merkle Tree'
+    name: 'Proposal',
+    message: 'Internal Error on Proposal {0}',
+    errors: [{
+      name: 'invalidDate',
+      message: 'Invalid Date'
+    }, {
+      name: 'invalidDateWindow',
+      message: 'Invalid Timespan'
+    }, {
+      name: 'invalidAddress',
+      message: 'Invalid Address'
+    },
+    {
+      name: 'invalidP2SHAddress',
+      message: 'Invalid P2SHAddress'
+    },
+    {
+      name: 'invalidPayment',
+      message: 'Invalid Payment Amount'
+    }, {
+      name: 'invalidUrl',
+      message: 'Invalid URL'
+    }, {
+      name: 'invalidName',
+      message: 'Invalid Name'
+    }]
   }]
 }, {
   name: 'Transaction',
@@ -91,6 +118,12 @@ module.exports = [{
   }, {
     name: 'InvalidSatoshis',
     message: 'Output satoshis are invalid',
+  }, {
+    name: 'InvalidPayloadSize',
+    message: 'Transaction payload size is invalid',
+  }, {
+    name: 'SpecialTransactionTypeIsNotSet',
+    message: 'Special transaction type is not set',
   }, {
     name: 'FeeError',
     message: 'Internal Error on Fee {0}',
@@ -138,7 +171,7 @@ module.exports = [{
     message: 'Invalid derivation argument {0}, expected string, or number and boolean'
   }, {
     name: 'InvalidEntropyArgument',
-    message: 'Invalid entropy: must be an hexa string or binary buffer, got {0}',
+    message: 'Invalid entropy: must be a hex string or binary buffer, got {0}',
     errors: [{
       name: 'TooMuchEntropy',
       message: 'Invalid entropy: more than 512 bits is non standard, got "{0}"'

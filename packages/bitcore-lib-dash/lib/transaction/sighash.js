@@ -1,6 +1,7 @@
-'use strict';
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
 
-var buffer = require('buffer');
+'use strict';
 
 var Signature = require('../crypto/signature');
 var Script = require('../script');
@@ -70,7 +71,7 @@ var sighash = function sighash(transaction, sighashType, inputNumber, subscript)
 
     for (i = 0; i < inputNumber; i++) {
       txcopy.outputs[i] = new Output({
-        satoshis: BN.fromBuffer(new buffer.Buffer(BITS_64_ON, 'hex')),
+        satoshis: BN.fromBuffer(Buffer.from(BITS_64_ON, 'hex')),
         script: Script.empty()
       });
     }

@@ -1,3 +1,6 @@
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
 'use strict';
 
 var BN = require('./bn');
@@ -182,7 +185,7 @@ ECDSA.prototype.sigError = function() {
     return 'p is infinity';
   }
 
-  if (p.getX().umod(n).cmp(r) !== 0) {
+  if (p.getX().mod(n).cmp(r) !== 0) {
     return 'Invalid signature';
   } else {
     return false;

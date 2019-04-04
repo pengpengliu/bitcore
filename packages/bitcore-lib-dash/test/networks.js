@@ -1,3 +1,6 @@
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
 'use strict';
 
 var expect = require('chai').expect;
@@ -15,24 +18,26 @@ describe('Networks', function() {
     should.exist(networks.defaultNetwork);
   });
 
-  it('#DEPRECATED will enable/disable regtest Network', function() {
-    const beforeEnable = networks.testnet;
+  it('will enable/disable regtest Network', function() {
     networks.enableRegtest();
-    /*
-     *networks.testnet.networkMagic.should.deep.equal(new Buffer('fabfb5da', 'hex'));
-     *networks.testnet.port.should.equal(18444);
-     *networks.testnet.dnsSeeds.should.deep.equal([]);
-     *networks.testnet.regtestEnabled.should.equal(true);
-     */
-    networks.testnet.should.deep.equal(beforeEnable);
+    networks.testnet.networkMagic.should.deep.equal(Buffer.from('fcc1b7dc', 'hex'));
+    networks.testnet.port.should.equal(19994);
+    networks.testnet.dnsSeeds.should.deep.equal([]);
+    networks.testnet.regtestEnabled.should.equal(true);
 
     networks.disableRegtest();
-    networks.testnet.should.deep.equal(beforeEnable);
+    networks.testnet.networkMagic.should.deep.equal(Buffer.from('cee2caff', 'hex'));
+    networks.testnet.port.should.equal(19999);
+    networks.testnet.dnsSeeds.should.deep.equal([
+     'testnet-seed.darkcoin.io',
+     'testnet-seed.dashdot.io',
+     'test.dnsseed.masternode.io'
+    ]);
   });
 
   it('will get network based on string "regtest" value', function() {
     var network = networks.get('regtest');
-    network.should.equal(networks.regtest);
+    network.should.equal(networks.testnet);
   });
 
   it('should be able to define a custom Network', function() {
@@ -57,7 +62,7 @@ describe('Networks', function() {
       if (key !== 'networkMagic') {
         customnet[key].should.equal(custom[key]);
       } else {
-        var expected = new Buffer('e7beb4d4', 'hex');
+        var expected = Buffer.from('e7beb4d4', 'hex');
         customnet[key].should.deep.equal(expected);
       }
     }
@@ -72,7 +77,7 @@ describe('Networks', function() {
   it('should not set a network map for an undefined value', function() {
     var custom = {
       name: 'somenet',
-      pubkeyhash: 0x13,
+      pubkeyhash: 0x14,
       privatekey: 0x93,
       scripthash: 0x11,
       xpubkey: 0x0278b20f,
@@ -86,10 +91,7 @@ describe('Networks', function() {
     networks.add(custom);
     var network = networks.get(undefined);
     should.not.exist(network);
-    var somenet = networks.get('somenet');
-    should.exist(somenet);
-    somenet.name.should.equal('somenet');
-    networks.remove(somenet);
+    networks.remove(custom);
   });
 
   var constants = ['name', 'alias', 'pubkeyhash', 'scripthash', 'xpubkey', 'xprivkey'];
@@ -102,14 +104,14 @@ describe('Networks', function() {
   });
 
   it('tests only for the specified key', function() {
-    expect(networks.get(0x6f, 'pubkeyhash')).to.equal(networks.testnet);
-    expect(networks.get(0x6f, 'privatekey')).to.equal(undefined);
+    expect(networks.get(0x8c, 'pubkeyhash')).to.equal(networks.testnet);
+    expect(networks.get(0x8c, 'privatekey')).to.equal(undefined);
   });
 
   it('can test for multiple keys', function() {
-    expect(networks.get(0x6f, ['pubkeyhash', 'scripthash'])).to.equal(networks.testnet);
-    expect(networks.get(0xc4, ['pubkeyhash', 'scripthash'])).to.equal(networks.testnet);
-    expect(networks.get(0x6f, ['privatekey', 'port'])).to.equal(undefined);
+    expect(networks.get(0x8c, ['pubkeyhash', 'scripthash'])).to.equal(networks.testnet);
+    expect(networks.get(0x13, ['pubkeyhash', 'scripthash'])).to.equal(networks.testnet);
+    expect(networks.get(0x8c, ['privatekey', 'port'])).to.equal(undefined);
   });
 
   it('converts to string using the "name" property', function() {

@@ -1,3 +1,6 @@
+/* eslint-disable */
+// TODO: Remove previous line and work through linting issues at next edit
+
 'use strict';
 
 var BN = require('bn.js');
@@ -170,6 +173,18 @@ BN.prototype.toScriptNumBuffer = function() {
   return this.toSM({
     endian: 'little'
   });
+};
+
+BN.prototype.gt = function(b) {
+  return this.cmp(b) > 0;
+};
+
+BN.prototype.gte = function(b) {
+  return this.cmp(b) >= 0;
+};
+
+BN.prototype.lt = function(b) {
+  return this.cmp(b) < 0;
 };
 
 BN.trim = function(buf, natlen) {

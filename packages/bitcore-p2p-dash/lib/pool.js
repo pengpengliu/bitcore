@@ -2,10 +2,10 @@
 
 var dns = require('dns');
 var EventEmitter = require('events').EventEmitter;
-var bitcore = require('bitcore-lib-dash');
-var sha256 = bitcore.crypto.Hash.sha256;
+var dashcore = require('bitcore-lib-dash');
+var sha256 = dashcore.crypto.Hash.sha256;
 var Peer = require('./peer');
-var Networks = bitcore.Networks;
+var Networks = dashcore.Networks;
 var util = require('util');
 var net = require('net');
 
@@ -112,7 +112,7 @@ Pool.RetrySeconds = 30;
 Pool.PeerEvents = ['version', 'inv', 'getdata', 'ping', 'pong', 'addr',
   'getaddr', 'verack', 'reject', 'alert', 'headers', 'block', 'merkleblock',
   'tx', 'getblocks', 'getheaders', 'error', 'filterload', 'filteradd',
-  'filterclear'
+  'filterclear', 'getmnlistdiff', 'mnlistdiff'
 ];
 
 /**

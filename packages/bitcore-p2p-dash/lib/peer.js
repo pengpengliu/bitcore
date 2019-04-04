@@ -4,11 +4,10 @@ var Buffers = require('./buffers');
 var EventEmitter = require('events').EventEmitter;
 var Net = require('net');
 var Socks5Client = require('socks5-client');
-var bitcore = require('bitcore-lib-dash');
-var bcoin = require('bcoin');
-var Networks = bitcore.Networks;
+var dashcore = require('bitcore-lib-dash');
+var Networks = dashcore.Networks;
 var Messages = require('./messages');
-var $ = bitcore.util.preconditions;
+var $ = dashcore.util.preconditions;
 var util = require('util');
 
 /**
@@ -66,8 +65,8 @@ function Peer(options) {
 
   this.messages = options.messages || new Messages({
     network: this.network,
-    Block: bcoin.block,
-    Transaction: bcoin.tx
+    Block: dashcore.Block,
+    Transaction: dashcore.Transaction
   });
 
   this.dataBuffer = new Buffers();
@@ -141,7 +140,7 @@ Peer.prototype.connect = function() {
   this.status = Peer.STATUS.CONNECTING;
 
   var self = this;
-  this.socket.on('connect', function(ev) {
+  this.socket.on('connect', function() {
     self.status = Peer.STATUS.CONNECTED;
     self.emit('connect');
     self._sendVersion();
@@ -230,7 +229,11 @@ Peer.prototype._readMessage = function() {
  */
 Peer.prototype._getSocket = function() {
   if (this.proxy) {
-    return new Socks5Client(this.proxy.host, this.proxy.port);
+    var options = {
+      hostname: this.proxy.host,
+      port: this.proxy.port
+    };
+    return new Socks5Client.Socket(options);
   }
 
   return new Net.Socket();
