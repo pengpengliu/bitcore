@@ -10,5 +10,9 @@ module.exports = {
   LTC: {
     lib: require('litecore-lib'),
     p2p: require('litecore-p2p'),
+  },
+  DOGE: {
+    lib: require('bitcore-lib-doge'),
+    p2p: require('bitcore-p2p-doge'),
   }
 }
