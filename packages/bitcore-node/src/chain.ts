@@ -14,5 +14,9 @@ module.exports = {
   DOGE: {
     lib: require('bitcore-lib-doge'),
     p2p: require('bitcore-p2p-doge'),
+  },
+  DASH: {
+    lib: require('bitcore-lib-dash'),
+    p2p: require('bitcore-p2p-dash'),
   }
 }
