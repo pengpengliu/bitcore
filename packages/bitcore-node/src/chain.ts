@@ -18,5 +18,9 @@ module.exports = {
   DASH: {
     lib: require('bitcore-lib-dash'),
     p2p: require('bitcore-p2p-dash'),
+  },
+  ZEC: {
+    lib: require('bitcore-lib-zcash'),
+    p2p: require('bitcore-p2p-zcash'),
   }
 }
