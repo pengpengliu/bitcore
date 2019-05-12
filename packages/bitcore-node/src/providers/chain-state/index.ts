@@ -5,7 +5,6 @@ import { LTCStateProvider } from './ltc/ltc';
 import { DogeStateProvider } from './doge/doge';
 import { DashStateProvider } from './dash/dash';
 import { ZECStateProvider } from './zec/zec';
-import { QTUMStateProvider } from './qtum/qtum';
 import { ETHStateProvider } from './eth/eth';
 import { BATStateProvider } from './erc20/tokens/bat';
 import { CSP } from '../../types/namespaces/ChainStateProvider';
@@ -19,7 +18,6 @@ const services: CSP.ChainStateServices = {
   DOGE: new DogeStateProvider(),
   DASH: new DashStateProvider(),
   ZEC: new ZECStateProvider(),
-  QTUM: new QTUMStateProvider(),
   ETH: new ETHStateProvider(),
   BAT: new BATStateProvider()
 };

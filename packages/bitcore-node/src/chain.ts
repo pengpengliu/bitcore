@@ -22,9 +22,5 @@ module.exports = {
   ZEC: {
     lib: require('bitcore-lib-zcash'),
     p2p: require('bitcore-p2p-zcash'),
-  },
-  QTUM: {
-    lib: require('bitcore-lib-qtum'),
-    p2p: require('bitcore-p2p-qtum'),
   }
 }
