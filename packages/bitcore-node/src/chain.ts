@@ -22,5 +22,9 @@ module.exports = {
   ZEC: {
     lib: require('bitcore-lib-zcash'),
     p2p: require('bitcore-p2p-zcash'),
+  },
+  BSV: {
+    lib: require('bitcore-lib-bsv'),
+    p2p: require('bitcore-p2p-bsv'),
   }
 }
