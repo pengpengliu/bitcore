@@ -1,5 +1,6 @@
 import { BTCStateProvider } from './btc/btc';
 import { BCHStateProvider } from './bch/bch';
+import { BSVStateProvider } from './bsv/bsv';
 import { LTCStateProvider } from './ltc/ltc';
 import { DogeStateProvider } from './doge/doge';
 import { DashStateProvider } from './dash/dash';
@@ -13,6 +14,7 @@ import { Chain } from '../../types/ChainNetwork';
 const services: CSP.ChainStateServices = {
   BTC: new BTCStateProvider(),
   BCH: new BCHStateProvider(),
+  BSV: new BSVStateProvider(),
   LTC: new LTCStateProvider(),
   DOGE: new DogeStateProvider(),
   DASH: new DashStateProvider(),
