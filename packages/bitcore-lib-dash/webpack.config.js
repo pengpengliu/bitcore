@@ -15,7 +15,7 @@ const commonJSConfig = {
 const rawConfig = Object.assign({}, commonJSConfig, {
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'dashcore-lib.js',
+    filename: 'bitcore-lib-dash.js',
     library: 'dashcore',
     libraryTarget: 'umd',
   }
@@ -23,7 +23,7 @@ const rawConfig = Object.assign({}, commonJSConfig, {
 const uglifiedConfig = Object.assign({}, commonJSConfig, {
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'dashcore-lib.min.js',
+    filename: 'bitcore-lib-dash.min.js',
     library: 'dashcore',
     libraryTarget: 'umd',
   },

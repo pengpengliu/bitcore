@@ -1,6 +1,6 @@
 # Dashcore Library
 
-[![Build Status](https://img.shields.io/travis/dashevo/dashcore-lib.svg?branch=master)](https://travis-ci.org/dashevo/dashcore-lib)
+[![Build Status](https://img.shields.io/travis/dashevo/bitcore-lib-dash.svg?branch=master)](https://travis-ci.org/dashevo/bitcore-lib-dash)
 [![NPM Package](https://img.shields.io/npm/v/bitcore-lib-dash.svg)](https://www.npmjs.org/package/bitcore-lib-dash)
 
 > A pure and powerful JavaScript Dash library.
@@ -24,24 +24,24 @@ npm install bitcore-lib-dash
 
 ### Browser
 
-See the section below to generate your own bundle, or download the pre-generated [minified file](dist/dashcore-lib.min.js)
+See the section below to generate your own bundle, or download the pre-generated [minified file](dist/bitcore-lib-dash.min.js)
 
 #### Building the Browser Bundle
 
-To build a dashcore-lib full bundle for the browser:
+To build a bitcore-lib-dash full bundle for the browser:
 
 ```sh
 npm run build
 ```
 
-This will generate files named `dashcore-lib.js` and `dashcore-lib.min.js` in the `dist/` folder.
+This will generate files named `bitcore-lib-dash.js` and `bitcore-lib-dash.min.js` in the `dist/` folder.
 
 ## Usage
 
 ### Browser
 
 ```
-<script src='./dist/dashcore-lib.min.js' type="text/javascript"></script>
+<script src='./dist/bitcore-lib-dash.min.js' type="text/javascript"></script>
 <script>
   const PrivateKey = dashcore.PrivateKey;
   const privateKey = new PrivateKey();
@@ -64,8 +64,8 @@ Some functionality is implemented as a module that can be installed separately:
 ### Development & Tests
 
 ```sh
-git clone https://github.com/dashevo/dashcore-lib
-cd dashcore-lib
+git clone https://github.com/dashevo/bitcore-lib-dash
+cd bitcore-lib-dash
 npm install
 ```
 
@@ -111,7 +111,7 @@ Some examples can be found [here](docs/examples.md), below is a list of direct l
 
 ## Contributing
 
-Please send pull requests for bug fixes, code optimization, and ideas for improvement. For more information on how to contribute, please refer to our [CONTRIBUTING](https://github.com/dashevo/dashcore-lib/blob/master/CONTRIBUTING.md) file.
+Please send pull requests for bug fixes, code optimization, and ideas for improvement. For more information on how to contribute, please refer to our [CONTRIBUTING](https://github.com/dashevo/bitcore-lib-dash/blob/master/CONTRIBUTING.md) file.
 
 ## License
 
