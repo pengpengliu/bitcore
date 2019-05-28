@@ -20,7 +20,7 @@ function builder(options) {
   options.Transaction = options.Transaction || dashcore.Transaction;
   options.MerkleBlock = options.MerkleBlock || dashcore.MerkleBlock;
   options.MnListDiff = options.MnListDiff || dashcore.MnListDiff;
-  options.protocolVersion = options.protocolVersion || 130000;
+  options.protocolVersion = options.protocolVersion || 70214;
 
   var exported = {
     constructors: {
@@ -70,6 +70,8 @@ function builder(options) {
     unsupportedCommands: [
       'sendheaders',
       'sendcmpct',
+      'senddsq',
+      'qsendrecsigs',
       'txlvote',
       'spork',
       'getsporks',

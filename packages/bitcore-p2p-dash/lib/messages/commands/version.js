@@ -68,6 +68,7 @@ VersionMessage.prototype.setPayload = function(payload) {
   } else {
     this.relay = !!parser.readUInt8();
   }
+  parser.readAll();
   utils.checkFinished(parser);
 };
 
