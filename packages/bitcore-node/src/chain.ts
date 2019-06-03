@@ -28,7 +28,7 @@ module.exports = {
     p2p: require('bitcore-p2p-bsv'),
   },
   BHD: {
-    lib: require('bitcore-lib'),
-    p2p: require('bitcore-p2p'),
+    lib: require('bitcore-lib-bhd'),
+    p2p: require('bitcore-p2p-bhd'),
   }
 }
