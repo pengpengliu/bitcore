@@ -60,6 +60,37 @@ function builder(options) {
       mempool: 'MemPool',
       getaddr: 'GetAddr'
     },
+    unsupportedCommands: [
+      'sendheaders',
+      'sendcmpct',
+      'senddsq',
+      'qsendrecsigs',
+      'txlvote',
+      'spork',
+      'getsporks',
+      'mnw',
+      'mnget',
+      'mn scan error',
+      'mnvs',
+      'mvote',
+      'mprop',
+      'fbs',
+      'fbvote',
+      'mn quorum',
+      'mnb',
+      'mnp',
+      'dsa',
+      'dsi',
+      'dsf',
+      'dss',
+      'dsc',
+      'dssu',
+      'dstx',
+      'dseg',
+      'govsync',
+      'govobj',
+      'govobjvote'
+    ],
     commands: {}
   };
 
