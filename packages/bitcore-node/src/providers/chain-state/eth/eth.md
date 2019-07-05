@@ -19,7 +19,7 @@ The main network shows how to connect via websocket
     "main": {
       "chainSource": "web3",
       "provider": {
-        "protocool": "wss",
+        "protocol": "wss",
         "host": "mainnet.infura.io/ws"
       }
     }
@@ -28,7 +28,7 @@ The main network shows how to connect via websocket
   "main": {
     "chainSource": "web3",
     "provider": {
-      "protocool": "wss",
+      "protocol": "wss",
       "host": "mainnet.infura.io/ws"
     }
   }
